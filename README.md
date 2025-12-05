@@ -97,5 +97,3 @@ python src/test_model.py
 **Ayşegül Uçan** 
 *Endüstri Mühendisliği Öğrencisi*
 
-```
-```
