@@ -2,89 +2,89 @@
 PROJE TEKNİK RAPORU: XRayCNN - YÜKSEK DUYARLILIKLI PNÖMONİ TESPİTİ
 ========================================================================
 
-1. YÖNETİCİ ÖZETİ (EXECUTIVE SUMMARY)
+1. ÖZET (SUMMARY)
 ------------------------------------------------------------------------
 Bu proje, göğüs röntgeni (Chest X-Ray) görüntülerini kullanarak Pnömoni 
 (Zatürre) teşhisini otomatize eden derin öğrenme tabanlı bir karar destek 
-sistemi geliştirmeyi amaçlamaktadır[cite: 162].
+sistemi geliştirmeyi amaçlamaktadır.
 
 Proje kapsamında, sınıf dengesizliği (Class Imbalance) sorununu çözmek için 
 özel bir "Offline Augmentation Pipeline" geliştirilmiş ve sıfırdan tasarlanan 
-"XRayCNN" mimarisi ile eğitilmiştir[cite: 163].
+"XRayCNN" mimarisi ile eğitilmiştir.
 
 SONUÇLAR:
 - Eğitim Doğruluğu (Train Accuracy): %98.32
-- Doğrulama Doğruluğu (Val Accuracy): %98.08 [cite: 164]
-- Test Duyarlılığı (Recall - Pnömoni): %99.7 (1.00) [cite: 164]
+- Doğrulama Doğruluğu (Val Accuracy): %98.08
+- Test Duyarlılığı (Recall - Pnömoni): %99.7 (1.00)
 
 Model, Pnömoni vakalarını kaçırmama (Zero-Miss) konusunda üstün bir performans 
-göstererek güçlü bir "Ön Tarama Aracı" potansiyeli taşımaktadır[cite: 164].
+göstererek güçlü bir "Ön Tarama Aracı" potansiyeli taşımaktadır.
 
 
 2. VERİ SETİ VE ÖN İŞLEME STRATEJİSİ
 ------------------------------------------------------------------------
 2.1. Veri Kaynağı
 Kullanılan veri seti, Paul Mooney tarafından derlenen "Chest X-Ray Images 
-(Pneumonia)" veri setidir[cite: 167]. Orijinal veri setindeki ciddi sınıf dengesizliği 
+(Pneumonia)" veri setidir. Orijinal veri setindeki ciddi sınıf dengesizliği 
 (Normal vakaların azlığı), modelin yanlı davranmasına neden olabilecek bir 
-risktir[cite: 168, 169].
+risktir.
 
-2.2. Gelişmiş Ön İşleme (Pipeline-2)
-Tıbbi görüntülerin özelliklerini korumak için şu adımlar uygulanmıştır[cite: 171]:
+2.2. Gelişmiş Ön İşleme 
+Tıbbi görüntülerin özelliklerini korumak için şu adımlar uygulanmıştır:
 
 A) Gri Tonlama (Grayscale): 
    Renk bilgisi tıbbi tanıda gereksiz olduğundan görüntüler yoğunluk 
-   haritalarına dönüştürüldü[cite: 172].
+   haritalarına dönüştürüldü.
 
 B) CLAHE (Contrast Limited Adaptive Histogram Equalization):
    - Amaç: Akciğerin kemik arkasında kalan "buzlu cam" (ground-glass) 
-     opaklıklarını belirginleştirmek[cite: 174].
-   - Ayarlar: clipLimit=2.0 (Gürültüyü artırmadan kontrastı artırır)[cite: 175].
+     opaklıklarını belirginleştirmek.
+   - Ayarlar: clipLimit=2.0 (Gürültüyü artırmadan kontrastı artırır).
 
 2.3. Veri Çoğaltma (Augmentation)
 Veri setini dengelemek (8000 Normal - 8000 Pnömoni) için şu yöntemler 
-kullanılmıştır[cite: 177]:
+kullanılmıştır:
 
-- Rotasyon (±15 Derece): Hastanın duruş bozukluklarını simüle eder[cite: 178].
-- Kaydırma (±%10): Teknisyen hizalama hatalarını simüle eder[cite: 178].
-- Kontrast (±%12): Farklı röntgen cihazlarının dozaj farklarını simüle eder[cite: 178].
+- Rotasyon (±15 Derece): Hastanın duruş bozukluklarını simüle eder.
+- Kaydırma (±%10): Teknisyen hizalama hatalarını simüle eder.
+- Kontrast (±%12): Farklı röntgen cihazlarının dozaj farklarını simüle eder.
 
 
 3. MODEL MİMARİSİ: XRayCNN
 ------------------------------------------------------------------------
 Transfer öğrenme (ResNet vb.) yerine, hesaplama maliyeti düşük ve probleme 
-özgü "XRayCNN" mimarisi sıfırdan tasarlanmıştır[cite: 180].
+özgü "XRayCNN" mimarisi sıfırdan tasarlanmıştır.
 
 3.1. Mimari Detaylar
-Model iki ana bloktan oluşur[cite: 182]:
+Model iki ana bloktan oluşur:
 
 A) Özellik Çıkarma (Feature Extraction):
    - 4 ardışık Konvolüsyon Bloğu.
-   - Her blok: Conv2d (3x3) -> BatchNorm -> ReLU -> MaxPooling[cite: 185].
-   - 3x3 Kernel: Lezyon sınırlarını yakalamak için standarttır[cite: 186].
-   - BatchNorm: Eğitimi hızlandırır ve kararlı hale getirir[cite: 187].
+   - Her blok: Conv2d (3x3) -> BatchNorm -> ReLU -> MaxPooling.
+   - 3x3 Kernel: Lezyon sınırlarını yakalamak için standarttır.
+   - BatchNorm: Eğitimi hızlandırır ve kararlı hale getirir.
 
 B) Sınıflandırma (Classification Head):
-   - Yapı: Flatten -> Linear(512) -> ReLU -> Dropout(0.5) -> Linear(1)[cite: 189].
+   - Yapı: Flatten -> Linear(512) -> ReLU -> Dropout(0.5) -> Linear(1).
    - Dropout (%50): Modelin ezberlemesini (Overfitting) engelleyen en kritik 
-     katmandır[cite: 190].
+     katmandır.
 
 3.2. Eğitim Konfigürasyonu
-- Loss Fonksiyonu: BCEWithLogitsLoss (Sayısal kararlılık için)[cite: 192].
-- Optimizasyon: Adam (Learning Rate = 0.0001)[cite: 193].
-- Donanım: NVIDIA RTX 3050 GPU[cite: 194].
+- Loss Fonksiyonu: BCEWithLogitsLoss (Sayısal kararlılık için).
+- Optimizasyon: Adam (Learning Rate = 0.0001).
+- Donanım: NVIDIA RTX 3050 GPU.
 
 
 4. DENEYSEL SONUÇLAR VE ANALİZ
 ------------------------------------------------------------------------
 4.1. Eğitim Süreci
-Model 10 Epoch eğitilmiş, en iyi sonuç Epoch 9'da alınmıştır[cite: 197].
+Model 10 Epoch eğitilmiş, en iyi sonuç Epoch 9'da alınmıştır.
 - Training Accuracy: %98.32
-- Validation Accuracy: %98.08 [cite: 199, 200]
-Eğitim ve doğrulama başarısının yakınlığı, Overfitting olmadığını kanıtlar[cite: 201].
+- Validation Accuracy: %98.08
+Eğitim ve doğrulama başarısının yakınlığı, Overfitting olmadığını kanıtlar.
 
 4.2. Test Sonuçları (Gerçek Dünya Performansı)
-Model, hiç görmediği 624 test görüntüsü üzerinde değerlendirilmiştir[cite: 204].
+Model, hiç görmediği 624 test görüntüsü üzerinde değerlendirilmiştir.
 
 | METRİK                | DEĞER | ANLAMI                               |
 |-----------------------|-------|--------------------------------------|
@@ -93,19 +93,19 @@ Model, hiç görmediği 624 test görüntüsü üzerinde değerlendirilmiştir[c
 | Precision (Pnömoni)   | 0.74  | Pozitif tahmin güvenilirliği.         |
 
 4.3. Tıbbi Yorum
-- TRUE POSITIVE: 390 hastadan 389'u doğru tespit edildi (Başarı: %99.7)[cite: 210].
-- FALSE NEGATIVE: Sadece 1 hasta gözden kaçtı[cite: 211].
-- FALSE POSITIVE: 138 sağlıklı kişiye yanlışlıkla hasta dendi[cite: 213].
+- TRUE POSITIVE: 390 hastadan 389'u doğru tespit edildi (Başarı: %99.7).
+- FALSE NEGATIVE: Sadece 1 hasta gözden kaçtı.
+- FALSE POSITIVE: 138 sağlıklı kişiye yanlışlıkla hasta dendi.
 
 YORUM: Model, riske girmemek adına şüpheli gördüğü her durumu "Hasta" olarak 
 etiketleme eğilimindedir. Bir tarama aracı olarak bu kabul edilebilir bir 
 durumdur; sağlıklı birine test yapmak (maliyet), hasta birini eve göndermekten 
-(ölüm riski) daha güvenlidir[cite: 216, 217].
+(ölüm riski) daha güvenlidir.
 
 
 5. SONUÇ
 ------------------------------------------------------------------------
 Geliştirilen XRayCNN modeli, özellikle hastalığı gözden kaçırmama (Zero-Miss) 
 konusunda üstün bir performans sergilemiştir. Proje, derin öğrenmenin tıbbi 
-görüntülemede "İkinci Görüş" aracı olarak kullanılabilirliğini kanıtlamaktadır[cite: 219, 220].
+görüntülemede "İkinci Görüş" aracı olarak kullanılabilirliğini kanıtlamaktadır.
 ========================================================================
