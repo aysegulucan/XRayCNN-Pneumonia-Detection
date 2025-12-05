@@ -1,0 +1,19 @@
+# --- Python Gereksiz Dosyaları ---
+__pycache__/
+*.py[cod]
+*.so
+
+# --- Sanal Ortam (Virtual Environment) ---
+.venv/
+venv/
+ENV/
+
+# --- Veri Seti (GitHub Boyut Sınırını Aşar) ---
+data/
+
+# --- Editör Ayarları ---
+.vscode/
+.idea/
+
+# --- Yerel Ayarlar ---
+.env
