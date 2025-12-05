@@ -46,7 +46,7 @@ Model, **"Zero-Miss" (Sıfır Hata)** eğilimi göstermektedir. Test setinde sad
 
 ### 1. Projeyi Klonlayın
 ```bash
-git clone [https://github.com/KULLANICI_ADINIZ/XRayCNN-Pneumonia-Detection.git](https://github.com/KULLANICI_ADINIZ/XRayCNN-Pneumonia-Detection.git)
+git clone [https://github.com/aysegulucan/XRayCNN-Pneumonia-Detection.git](https://github.com/aysegulucan/XRayCNN-Pneumonia-Detection.git)
 cd XRayCNN-Pneumonia-Detection
 ````
 
@@ -66,6 +66,7 @@ Dosyaları ana dizindeki `data/` klasörüne şu yapıda çıkarın:
   * `data/test`
 
 ### 4\. Modeli Eğitin
+Not: Eğitim sonucu oluşan model dosyası (best_model.pth) yaklaşık 100MB olduğu için GitHub deposuna eklenemedi. Bu nedenle modeli kendiniz eğiterek oluşturmanız gerekmektedir. Eğitim tamamlandığında otomatik olarak kaydedilecektir.
 
 Sıfırdan eğitim başlatmak için:
 
