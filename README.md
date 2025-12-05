@@ -1,4 +1,4 @@
-# 🩻 XRayCNN: Derin Öğrenme ile Zatürre (Pnömoni) Tespiti
+# XRayCNN: Derin Öğrenme ile Zatürre (Pnömoni) Tespiti
 
 ![Test Sonuçları](results/test_sonuclari_matrix.png)
 
