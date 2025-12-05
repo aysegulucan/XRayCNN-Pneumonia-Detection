@@ -54,10 +54,11 @@ def get_data_loaders(data_dir, batch_size=32):
 # --- Test Bloğu ---
 if __name__ == "__main__":
     # Test etmek için kendi yolunu buraya yaz
-    path = r"C:\\Users\\Ayşegül Uçan\\Desktop\\DL_Project\\One_O_One\\changable_dataset"
+    path = r"Buraya kendi TRAIN yolunu yapıştır"
     try:
         t_loader, v_loader = get_data_loaders(path)
         images, labels = next(iter(t_loader))
         print(f"   - Batch Boyutu: {images.shape}") # [32, 3, 224, 224] olmalı
     except Exception as e:
+
         print(f"Hata: {e}")
