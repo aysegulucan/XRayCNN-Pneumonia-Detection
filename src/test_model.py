@@ -39,8 +39,8 @@ def load_best_model(model_path):
 
 def main():
     # 1. Yolları Tanımla (BURAYI GÜNCELLE!)
-    VERI_YOLU = r"C:\\Users\\Ayşegül Uçan\\Desktop\\DL_Project\\One_O_One\\changable_dataset" 
-    MODEL_YOLU = "best_model.pth" # train.py ile aynı klasörde oluşmuştu
+    VERI_YOLU = r"Buraya kendi dataseti yolunu yapıştır" 
+    MODEL_YOLU = "best_model.pth" # modelin yolunu gir
     
     # 2. Veriyi ve Modeli Yükle
     print("⏳ Test verisi hazırlanıyor...")
@@ -90,4 +90,5 @@ def main():
     plt.show()
 
 if __name__ == "__main__":
+
     main()
