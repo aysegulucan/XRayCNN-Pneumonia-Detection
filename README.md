@@ -1,6 +1,3 @@
-Özür dilerim, haklısın. İstediğin tüm detayları (96 görselin taşınması, tam sayılar, senin yazdığın başlık yapısı ve model özeti formatı) birebir içeren ve GitHub için hazır olan kod bloğu aşağıdadır.
-
-````markdown
 # 🩻 XRayCNN: Derin Öğrenme ile Zatürre (Pnömoni) Tespiti
 
 ![Test Sonuçları](results/test_sonuclari_matrix.png)
