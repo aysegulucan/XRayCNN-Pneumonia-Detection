@@ -7,7 +7,7 @@
 
 Veri setindeki ciddi **Sınıf Dengesizliği (Class Imbalance)** sorununu çözmek için özel bir **Offline Augmentation Pipeline** geliştirilmiş ve literatüre dayalı, özgün bir CNN mimarisi sıfırdan tasarlanmıştır.
 
-📄 **Detaylı teknik raporu incelemek için tıklayın:** [Proje Raporu (PDF/DOCX)](proje_raporu.docx)
+📄 **Detaylı teknik raporu incelemek için tıklayın:** [Proje Raporu (PDF/DOCX)](proje_raporu.txt)
 
 ## 📂 Veri Seti Yapılandırması (Dataset Split)
 Proje başlangıcında, modelin gerçek dünya performansını ölçmek için **Train** klasöründeki Normal ve Pnömoni sınıflarından **96'şar adet fotoğraf** alınarak **Test** klasörüne taşınmıştır. Veri sayıları bu işleme göre oluşmuştur:
