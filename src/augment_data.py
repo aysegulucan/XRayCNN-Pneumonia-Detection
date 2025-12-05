@@ -83,7 +83,8 @@ def augment_folder_advanced(folder_path):
 if __name__ == "__main__":
     # --- AYARLAR ---
     # Buraya kendi TRAIN yolunu yapıştır
-    train_ana_yolu = r"C:\\Users\\Ayşegül Uçan\\Desktop\\DL_Project\\One_O_One\\changable_dataset\\train" 
+    train_ana_yolu = r"Buraya kendi TRAIN yolunu yapıştır" 
     
     augment_folder_advanced(os.path.join(train_ana_yolu, "NORMAL"))
+
     augment_folder_advanced(os.path.join(train_ana_yolu, "PNEUMONIA"))
