@@ -82,7 +82,7 @@ def main():
     
     # 1. Veriyi Yükle
     # BURAYA DİKKAT: Veri setinin olduğu yolu buraya yazmalısın!
-    VERI_YOLU = r"C:\\Users\\Ayşegül Uçan\\Desktop\\DL_Project\\One_O_One\\changable_dataset" 
+    VERI_YOLU = r"Buraya kendi dataseti yolunu yapıştır" 
     
     print("Veri yükleniyor...")
     train_loader, val_loader = get_data_loaders(VERI_YOLU, BATCH_SIZE)
@@ -154,4 +154,5 @@ def main():
     plt.show()
 
 if __name__ == "__main__":
+
     main()
