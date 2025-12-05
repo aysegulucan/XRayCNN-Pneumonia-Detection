@@ -54,7 +54,7 @@ def get_data_loaders(data_dir, batch_size=32):
 # --- Test Bloğu ---
 if __name__ == "__main__":
     # Test etmek için kendi yolunu buraya yaz
-    path = r"Buraya kendi TRAIN yolunu yapıştır"
+    path = r"Buraya kendi dataseti yolunu yapıştır"
     try:
         t_loader, v_loader = get_data_loaders(path)
         images, labels = next(iter(t_loader))
@@ -62,3 +62,4 @@ if __name__ == "__main__":
     except Exception as e:
 
         print(f"Hata: {e}")
+
